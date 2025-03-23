@@ -17,8 +17,9 @@
  * '01 Jan 1970 00:00:00 UTC' => 0
  * '04 Dec 1995 00:12:00 UTC' => 818035920000
  */
-function dateToTimestamp(/* date */) {
-  throw new Error('Not implemented');
+function dateToTimestamp(date) {
+  const startTimestamp = new Date('01 Jan 1970 00:00:00 UTC').getTime();
+  return new Date(date) - startTimestamp;
 }
 
 /**
@@ -297,9 +298,15 @@ function getWorkSchedule(/* period, countWorkDays, countOffDays */) {
  * Date(2022, 2, 1) => false
  * Date(2020, 2, 1) => true
  */
-function isLeapYear(/* date */) {
-  throw new Error('Not implemented');
+function isLeapYear(date) {
+  return (
+    date.getFullYear() % 4 === 0 ||
+    (date.getFullYear() % 100 === 0 && date.getFullYear() % 400 === 0)
+  );
 }
+isLeapYear(new Date(2024, 2, 1));
+isLeapYear(new Date(2022, 2, 1));
+isLeapYear(new Date(2020, 2, 1));
 
 module.exports = {
   dateToTimestamp,
